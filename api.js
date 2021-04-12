@@ -6,7 +6,7 @@ import axios from "axios";
 const TMDB_KEY = "a7e53a1c449e667172b82c0149875128";
 
 const makeRequest = (path, params) => {
-  axios.get(`https://api.themoviedb.org/3${path}`, {
+  return axios.get(`https://api.themoviedb.org/3${path}`, {
     params: {
       ...params,
       api_key: TMDB_KEY,
@@ -14,20 +14,39 @@ const makeRequest = (path, params) => {
   });
 };
 
+// https://developers.themoviedb.org/3/movies/get-movie-details 
+// 에서 detail에 대한 api 는 결과중 results:[] 의 프로퍼티가 없다. 그래서 return 값에 nullish 처리를 해준다.
+const getAnything = async(path, params={}) => {
+  try {
+    const {
+      data: {results},
+      data // 위에서 설명한 results 프로퍼티가없다면 undefined 가 뜨기 때문에.. 이렇게 data로 받게 만든다.
+    } = await makeRequest(path, params);
+    return [results || data, null]; //results가 undefined 일땐.. 위에서 설정힌 data로 전체데이터를 받는다.
+  } catch (error) {
+    console.log('error: ', error);
+    return [null, error];
+  }
+};
+
 export const movieApi = {
-  nowPlaying: () => makeRequest(),
-  popular: () => makeRequest(),
-  upcoming: () => makeRequest(),
-  search: (word) => makeRequest(),
-  movie: (id) => makeRequest(),
-  discover: () => makeRequest(),
+  nowPlaying: () => getAnything("/movie/now_playing"),
+  popular: () => getAnything("/movie/popular"),
+  upcoming: () => getAnything("/movie/upcoming", { region: "kr" }),
+  search: query => getAnything("/search/movie", { query }),
+  movie: id => getAnything(`/movie/${id}`),
+  discover: () => getAnything("/discover/movie")
 };
 
 export const tvApi = {
-  today: () => makeRequest(),
-  thisWeek: () => makeRequest(),
-  topRated: () => makeRequest(),
-  popular: () => makeRequest(),
-  search: (word) => makeRequest(),
-  show: (id) => makeRequest(),
+  today: () => getAnything("/tv/airing_today"),
+  thisWeek: () => getAnything("/tv/on_the_air"),
+  topRated: () => getAnything("/tv/top_rated"),
+  popular: () => getAnything("/tv/popular"),
+  search: query => getAnything("/search/tv", { query }),
+  show: id => getAnything(`/tv/${id}`)
+};
+
+export const apiImage = (path) => {
+  return `https://image.tmdb.org/t/p/w500${path}`;
 };
