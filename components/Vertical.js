@@ -23,8 +23,16 @@ const Title = styled.Text`
 //기본적으로
 
 const Vertical = ({ id, poster, title, votes }) => {
+  const navigation = useNavigation();
+  const goToDetail = () => {
+    //아래의 메서드에 리턴을 안줘도 되는지 체크해보자
+    navigation.navigate('Detail', {
+      id, title, votes
+    });
+  };
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={goToDetail}>
       <Container>
         <Poster url={poster} />
         <Title>{trimText(title, 10)}</Title>
