@@ -14,9 +14,16 @@ const Container = styled.View`
   margin-top: 30px;
 `;
 
-const TvPresenter = ({ loading, popular, topRated, today, thisWeek }) => {
+const TvPresenter = ({
+  loading,
+  popular,
+  topRated,
+  today,
+  thisWeek,
+  refreshFn,
+}) => {
   return (
-    <ScrollContainer loading={loading}>
+    <ScrollContainer loading={loading} refreshFn={refreshFn}>
       <Container>
         <HorizontalSlider title="Popular Shows">
           {popular.map((show) => (
@@ -44,7 +51,7 @@ const TvPresenter = ({ loading, popular, topRated, today, thisWeek }) => {
           {thisWeek.map((show) => (
             <Vertical
               id={show.id}
-              key={show.key}
+              key={show.id}
               poster={show.poster_path}
               title={show.original_name}
               votes={show.vote_average}

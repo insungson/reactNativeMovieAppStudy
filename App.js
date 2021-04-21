@@ -30,6 +30,7 @@ export default function App() {
   const loadAssets = () => {
     //아래의 AppLoading의 startAsync 에서 promise 객체를 받기 때문에 async await 제거!(기존의 Font, Image 가 promise 객체리턴)
     const images = cacheImages([
+      "https://images.unsplash.com/photo-1533637322518-7aadda74ddc0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=619&q=80",
       "https://images.unsplash.com/photo-1584486188544-dc2e1417aff1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
       require("./assets/splash.png"),
     ]);

@@ -1,17 +1,17 @@
 // Dimensions 는 screen 의 치수를 가져온다.
-import React from 'react';
-import styled from 'styled-components/native';
-import Swiper from 'react-native-web-swiper';
-import { Dimensions, ActivityIndicator, View, ScrollView } from 'react-native';
-import Slide from '../../components/Movies/Slide';
-import Title from '../../components/Title';
-import Vertical from '../../components/Vertical';
-import Horizontal from '../../components/Horizontal';
-import ScrollContainer from '../../components/ScrollContainer';
-import HorizontalSlider from '../../components/HorizontalSilder';
-import List from '../../components/List';
+import React from "react";
+import styled from "styled-components/native";
+import Swiper from "react-native-web-swiper";
+import { Dimensions, ActivityIndicator, View, ScrollView } from "react-native";
+import Slide from "../../components/Movies/Slide";
+import Title from "../../components/Title";
+import Vertical from "../../components/Vertical";
+import Horizontal from "../../components/Horizontal";
+import ScrollContainer from "../../components/ScrollContainer";
+import HorizontalSlider from "../../components/HorizontalSilder";
+import List from "../../components/List";
 
-const {width:WIDTH, height:HEIGHT} = Dimensions.get("window");
+const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 // 위에서 screen을 가져와도 되지만.. window 가 더 잘 맞아서 그걸로 가지고 있다.
 // window: width/height를 soft menu bar 없이 알려준다
 // screen: screen의 width/height를 알려준다
@@ -37,8 +37,7 @@ const SliderContainer = styled.View`
   margin-bottom: 40px;
 `;
 
-const Container = styled.View`
-`;
+const Container = styled.View``;
 
 const UpcomingContainer = styled.View`
   margin-top: 20px;
@@ -56,20 +55,26 @@ const UpcomingContainer = styled.View`
 
 // const Text = styled.Text``;
 
-const MoviePresenter = ({loading, nowPlaying, popular, upcoming}) => {
+const MoviePresenter = ({
+  loading,
+  nowPlaying,
+  popular,
+  upcoming,
+  refreshFn,
+}) => {
   // ActivityIndicator 는 react-native에서 제공하는것으로 폰에서 로딩되는 것을 보여준다.
 
   // Swiper의 옵션은 아래의 링크에서 확인해보면 된다
   // https://www.npmjs.com/package/react-native-web-swiper
   return (
-    // <ScrollView 
+    // <ScrollView
     //   style={{
     //     backgroundColor: "black"
     //   }}
     //   contentContainerStyle={{
     //     flex: loading ? 1 : 0,  //loading이 아닐땐 아래로 스크롤이 가능하도록 0을 넣어준다. flex 타입은 숫자만 가능하다!!
     //     justifyContent: loading ? "center": "flex-start",
-    //     // flex-start 는 가로 정렬을 기준으로 좌측(시작점) center는 가운데 flex-end 우측(끝점) 
+    //     // flex-start 는 가로 정렬을 기준으로 좌측(시작점) center는 가운데 flex-end 우측(끝점)
     //     // justifyContent 는 flex Direction의 진행방향으로 정렬한다.
     //     // Align Items 는 flex Direction의 진행방향의 수직적으로 정렬한다.
     //     // 즉!!! flexDirection: 'column'에서 Justify Content는 세로 정렬, flexDirection: 'row'에서 Justify Content는 가로 정렬을 뜻함
@@ -82,7 +87,7 @@ const MoviePresenter = ({loading, nowPlaying, popular, upcoming}) => {
     //     <SliderContainer>
     //       <Swiper controlsEnabled={false} loop timeout={3} >
     //         {nowPlaying.map((movie) => (
-    //           <Slide 
+    //           <Slide
     //             key={movie.id}
     //             id={movie.id}
     //             title={movie.original_title}
@@ -96,14 +101,14 @@ const MoviePresenter = ({loading, nowPlaying, popular, upcoming}) => {
     //     </SliderContainer>
     //     <Container>
     //       <Title title={"Popular Movies"}/>
-    //       <ScrollView 
+    //       <ScrollView
     //         horizontal
     //         style={{marginTop: 20, marginBottom: 40}}
     //         contentContainerStyle={{paddingLeft: 30}}
     //         showsHorizontalScrollIndicator={false}
     //       >
     //         {popular.map(movie => (
-    //           <Vertical 
+    //           <Vertical
     //             id={movie.id}
     //             key={movie.id}
     //             poster={movie.poster_path}
@@ -114,7 +119,7 @@ const MoviePresenter = ({loading, nowPlaying, popular, upcoming}) => {
     //       </ScrollView>
     //       <Title title={"Coming Soon"}></Title>
     //       {upcoming.map(movie => (
-    //         <Horizontal 
+    //         <Horizontal
     //           key={movie.id}
     //           id={movie.id}
     //           title={movie.title}
@@ -128,13 +133,13 @@ const MoviePresenter = ({loading, nowPlaying, popular, upcoming}) => {
     //   )}
     // </ScrollView>
 
-    <ScrollContainer loading={loading}>
+    <ScrollContainer loading={loading} refreshFn={refreshFn}>
       {/* 아래는 children으로 ScrollContainer에 들어가게 된다, ScrollContainer.js 참조 */}
       <>
         <SliderContainer>
           <Swiper controlsEnabled={false} loop timeout={3}>
-            {nowPlaying.map(movie => (
-              <Slide 
+            {nowPlaying.map((movie) => (
+              <Slide
                 key={movie.id}
                 id={movie.id}
                 title={movie.original_title}
@@ -156,8 +161,8 @@ const MoviePresenter = ({loading, nowPlaying, popular, upcoming}) => {
           > */}
           {/* 위의것을 아래것으로 교체 */}
           <HorizontalSlider title={"Popular Movies"}>
-            {popular.map(movie => (
-              <Vertical 
+            {popular.map((movie) => (
+              <Vertical
                 id={movie.id}
                 key={movie.id}
                 poster={movie.poster_path}
@@ -170,8 +175,8 @@ const MoviePresenter = ({loading, nowPlaying, popular, upcoming}) => {
           {/* <Title title={"Coming Soon"} />
           <UpcomingContainer> */}
           <List title="Coming Soon">
-            {upcoming.map(movie => (
-              <Horizontal 
+            {upcoming.map((movie) => (
+              <Horizontal
                 key={movie.id}
                 id={movie.id}
                 title={movie.title}

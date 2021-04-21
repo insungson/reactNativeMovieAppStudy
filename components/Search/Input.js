@@ -5,3 +5,36 @@
 // keyboardType 옵션은 앱의 화면에 보여주는 키보드의 타입을 고를 수 있다. ** 이건 좀 쓰일듯..
 // onChangeText 는 React의 onChange와 같은 기능을 해준다
 // onSubmitEditing 은 React의 onSubmit과 같은 기능을 해준다.
+
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components/native";
+
+const TextInput = styled.TextInput`
+  background-color: white;
+  margin: 0px 30px;
+  padding: 10px 20px;
+  border-radius: 15px;
+  margin-bottom: 50px;
+`;
+
+const Input = ({ placeHolder, value, onChange, onSubmit }) => {
+  return (
+    <TextInput
+      placeHolder={placeHolder}
+      value={value}
+      onChangeText={onChange}
+      onSubmitEditing={onSubmit}
+      returnKeyType={"search"}
+    />
+  );
+};
+
+Input.propTypes = {
+  placeHolder: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
+
+export default Input;
