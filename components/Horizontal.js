@@ -43,7 +43,7 @@ const Overview = styled.Text`
 const Horizontal = ({ id, title, releaseDate, poster, overview }) => {
   const navigation = useNavigation();
   const goToDetail = () => {
-    navigation.navigate("Detail", {
+    return navigation.navigate("Detail", {
       id,
       title,
       poster,
