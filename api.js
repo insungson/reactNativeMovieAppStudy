@@ -47,8 +47,9 @@ export const tvApi = {
   show: (id) => getAnything(`/tv/${id}`),
 };
 
-export const apiImage = (path) => {
-  return path
-    ? `https://image.tmdb.org/t/p/w500${path}`
-    : "https://images.unsplash.com/photo-1533637322518-7aadda74ddc0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2119&q=80";
+export const apiImage = (
+  path,
+  defaultPoster = "https://images.unsplash.com/photo-1533637322518-7aadda74ddc0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2119&q=80"
+) => {
+  return path ? `https://image.tmdb.org/t/p/w500${path}` : defaultPoster;
 };

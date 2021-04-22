@@ -40,7 +40,14 @@ const Overview = styled.Text`
 //클릭시 detail 창으로 이동하기 위한 React Navigation 을 넣어준다.
 //기본적으로 가진 정보가 많기 떄문에 바로 정보를 보내서 처리할 수 있다.
 
-const Horizontal = ({ id, title, releaseDate, poster, overview }) => {
+const Horizontal = ({
+  id,
+  title,
+  releaseDate,
+  poster,
+  overview,
+  backgroundImage,
+}) => {
   const navigation = useNavigation();
   const goToDetail = () => {
     return navigation.navigate("Detail", {
@@ -49,6 +56,7 @@ const Horizontal = ({ id, title, releaseDate, poster, overview }) => {
       poster,
       overview,
       releaseDate,
+      backgroundImage,
     });
   };
 
