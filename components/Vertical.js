@@ -22,11 +22,20 @@ const Title = styled.Text`
 //클릭시 detail 창으로 이동하기 위한 React Navigation 을 넣어준다.
 //기본적으로
 
-const Vertical = ({ id, poster, title, votes, backgroundImage }) => {
+// 클릭하여 Detail 스크린에서 api 요청시 TV와 Movie를 구분하기 위해 isTv 플래그를 넣어준다.
+const Vertical = ({
+  isTv = false,
+  id,
+  poster,
+  title,
+  votes,
+  backgroundImage,
+}) => {
   const navigation = useNavigation();
   const goToDetail = () => {
     //아래의 메서드에 리턴을 안줘도 되는지 체크해보자
     navigation.navigate("Detail", {
+      isTv,
       id,
       title,
       poster,

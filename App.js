@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Image, StyleSheet, Text, View, StatusBar } from "react-native";
 import AppLoading from "expo-app-loading"; //로딩화면을 쉽게 구성할 수 있다.
 import { Asset } from "expo-asset"; //expo 내부 모듈에 접근할 수 있게 한다.
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native"; //react 라우터같은 기능
 import Stack from "./navigation/Stack";
@@ -35,7 +35,7 @@ export default function App() {
       require("./assets/splash.png"),
     ]);
     // console.log(">>", images); //Ionicons, Font, Image 전부 Promise 객체 리턴해줌
-    const fonts = cacheFonts([Ionicons.font]);
+    const fonts = cacheFonts([Ionicons.font, FontAwesome.font]);
     // console.log(">> ", fonts);
     return Promise.all([...images, ...fonts]);
   };

@@ -75,8 +75,8 @@ const MoviePresenter = ({
     //     flex: loading ? 1 : 0,  //loading이 아닐땐 아래로 스크롤이 가능하도록 0을 넣어준다. flex 타입은 숫자만 가능하다!!
     //     justifyContent: loading ? "center": "flex-start",
     //     // flex-start 는 가로 정렬을 기준으로 좌측(시작점) center는 가운데 flex-end 우측(끝점)
-    //     // justifyContent 는 flex Direction의 진행방향으로 정렬한다.
-    //     // Align Items 는 flex Direction의 진행방향의 수직적으로 정렬한다.
+    //     // justifyContent 는 flex Direction의 진행방향으로 정렬한다.((ex)flex Direction이 세로일땐 세로방향)
+    //     // Align Items 는 flex Direction의 진행방향의 수직적으로 정렬한다. ((ex)flex Direction이 세로일땐 가로방향)
     //     // 즉!!! flexDirection: 'column'에서 Justify Content는 세로 정렬, flexDirection: 'row'에서 Justify Content는 가로 정렬을 뜻함
     //   }}
     // >
