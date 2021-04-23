@@ -42,6 +42,7 @@ const SearchPresenter = ({ movies, shows, keyWord, onChange, onSubmit }) => {
         <HorizontalSlider title={"TV Results"}>
           {shows.map((show) => (
             <Vertical
+              isTv={true}
               key={show.id}
               id={show.id}
               votes={show.vote_average}

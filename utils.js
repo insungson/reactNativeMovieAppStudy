@@ -14,11 +14,8 @@ export const formatDate = (date) => {
 };
 
 export const formatInt = (num) => {
-  console.log("num: ", num);
   const number = Number.parseInt(num);
-  return num == 0 || num == undefined
-    ? "0"
-    : `${Math.floor(number)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+  return Math.floor(number)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
