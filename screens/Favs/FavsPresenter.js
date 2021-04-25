@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PanResponder, Dimensions, Animated } from "react-native";
 import styled from "styled-components/native";
 import { apiImage } from "../../api";
 
-const { width: WIDRH, height: HEIGHT } = Dimensions.get("window");
+const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
 const Container = styled.View`
   flex: 1;
@@ -25,7 +25,7 @@ const Poster = styled.Image`
 `;
 
 const styles = {
-  top: 80,
+  top: 50,
   height: HEIGHT / 1.5,
   width: "90%",
   position: "absolute",
@@ -63,6 +63,7 @@ const styles = {
 const FavsPresenter = ({ results }) => {
   // useState를 사용하는 이유는.. 맨위에 뭐가 올라오는지 비교하기 위함이다.
   const [topIndex, setTopIndex] = useState(0);
+  const nextCard = () => setTopIndex(currentValue => currentValue + 1);
   // gestureState의 dx, dy는 드래그해서 움직인 거리에 해당하기 때문에.. 다른곳 클릭시 원복한다!!
   const position = new Animated.ValueXY();
   const panResponder = PanResponder.create({
@@ -76,13 +77,29 @@ const FavsPresenter = ({ results }) => {
     // *그리고 다음 카드를 보여주기 위해 조건문의 index를 추가하여 드래그 기능을 계속 사용하게 한다.
     // start()는 클릭을 땐후 실행하는 기능으로.. 콜백함수로 사용할 수도 있다!!
     // 그 안에 topIndex를 증가하는 setTopIndex를 넣어준다.
-    onPanResponderRelease: () => {
-      Animated.spring(position, {
-        toValue: {
-          x: 0,
-          y: 0,
-        },
-      }).start();
+    onPanResponderRelease: (evt, {dx, dy}) => {
+      if (dx >= 250) {
+        Animated.spring(position, {
+          toValue: {
+            x: WIDTH + 100,
+            y: dy,
+          },
+        }).start(nextCard);
+      } else if (dx <= -250) {
+        Animated.spring(position, {
+          toValue: {
+            x: -WIDTH - 100,
+            y: dy
+          }
+        }).start(nextCard);
+      } else {
+        Animated.spring(position, {
+          toValue: {
+            x:0, y:0
+          }
+        }).start();
+      }
+
     },
   });
   // const position = new Animated.ValueXY(); 에서 animated로 움직인값중...
@@ -109,12 +126,18 @@ const FavsPresenter = ({ results }) => {
     extrapolate: "clamp",
   });
 
+  useEffect(() => {
+    position.setValue({x:0, y:0})
+  }, [topIndex]); 
+
   // 첫번째 카드, 두번째카드, 나머지를 조건문으로 나눠 opacity를 정해주자
   // 여기선 위치의 각도 opacity(투명도), scale(크기) 를 조정하는데 사용하였다.
   return (
     <Container>
       {results.map((result, index) => {
-        if (index === topIndex) {
+        if (index < topIndex) {
+          return null;
+        } else if (index === topIndex) {
           return (
             <Animated.View
               key={result.id}
