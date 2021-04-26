@@ -5,11 +5,15 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "platforms": ["ios", "android", "web"],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "primaryColor": "#000000",
+    "backgroundColor": "#000000",
+    "supportsTablet": true,
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -23,7 +27,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "sonny.noovies",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -57,3 +57,13 @@ export default function App() {
     />
   );
 }
+
+//app.json 의 속성에 대해서..
+// slug: 배포전 이름을 정하는 것이다. myAppName 로 이름을 정한다면 expo.io/@project-owner/myAppName 프로젝트로 저장된다.
+// version: 배포 후 버전을 수정할때 사용한다.
+// primaryColor: 멀티태스커에서 앱의 색깔을 나타내준다.
+// androidStatusBar: 스테이터스바 폰의 맨위 상태창 색상을 정해준다.
+// android: package: 도메인이름.앱이름   으로 보통 정한다.
+
+//expo client 에서 빌드를 하면 expo server를 통해 APP으로 빌드가 되고.. 
+//추가로 앱스토어에서 다운을 받지 않더라도 자동으로 업데이트가 된다!
