@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 const Container = styled.View`
   flex-direction: row;
